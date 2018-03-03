@@ -21,8 +21,14 @@ before_script:
 # Wait for Kubernetes to be up and ready.
 - JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}'; until kubectl get nodes -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; do sleep 1; done
 
-script:
-- echo "hello from script"
-- go run main.go
-- kubectl describe all
-- lsb_release -a
+jobs:
+  include:
+    - stage: test
+      script:
+        - echo "hello stage test1"
+        - sleep 30
+      script:
+        - echo "hello stage test2"
+        - sleep 60
+    - stage: deploy
+      script: echo "deplyed"

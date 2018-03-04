@@ -22,7 +22,9 @@ before_script:
 - JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}'; until kubectl get nodes -o jsonpath="$JSONPATH" 2>&1 | grep -q "Ready=True"; do sleep 1; done
 # Install glide
 - curl https://glide.sh/get | sh
-# Redis info
+# Redis
+- sudo service  redis-server status
+- sudo service  redis-server start
 - redis-cli info
 
 jobs:

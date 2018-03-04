@@ -23,8 +23,9 @@ before_script:
 # Install glide
 - curl https://glide.sh/get | sh
 # Redis
-- sudo service  redis-server status
-- sudo service  redis-server start
+- sudo service redis-server start
+- sudo service redis-server status
+- sudo service redis-server star t
 - redis-cli info
 
 jobs:
